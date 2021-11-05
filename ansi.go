@@ -252,8 +252,11 @@ func Color(s, style string) string {
 	return buf.String()
 }
 
+// Colorizer takes an input string and colorizes it based on the style it was created with.
+type Colorizer func(s string) string
+
 // ColorFunc creates a closure to avoid computation ANSI color code.
-func ColorFunc(style string) func(string) string {
+func ColorFunc(style string) Colorizer {
 	if style == "" {
 		return func(s string) string {
 			return s
@@ -273,7 +276,7 @@ func ColorFunc(style string) func(string) string {
 }
 
 // ColorFuncVar creates a closure to avoid computation ANSI color code and returns ANSI sequence.
-func ColorFuncVar(style string) (func(string) string, string) {
+func ColorFuncVar(style string) (Colorizer, string) {
 	if style == "" {
 		return func(s string) string {
 			return s
