@@ -1,4 +1,4 @@
-package ansi
+package emerald
 
 import (
 	"bytes"
@@ -127,7 +127,7 @@ func init() {
 	LightWhite = ColorCode("white+h")
 }
 
-// ColorCode returns the ANSI color color code for style.
+// ColorCode returns the ANSI color code for style.
 func ColorCode(style string) string {
 	return colorCode(style).String()
 }

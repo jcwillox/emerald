@@ -1,10 +1,9 @@
-package ansi
+package emerald
 
 import (
 	"fmt"
+	"github.com/mattn/go-colorable"
 	"sort"
-
-	colorable "github.com/mattn/go-colorable"
 )
 
 // PrintStyles prints all style combinations to the terminal.

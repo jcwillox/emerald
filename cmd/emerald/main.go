@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/jcwillox/emerald"
+	"github.com/mattn/go-colorable"
 	"sort"
 	"strconv"
-
-	"github.com/mattn/go-colorable"
-	"github.com/mgutz/ansi"
 )
 
 func main() {
@@ -25,13 +24,13 @@ func pad(s string, length int) string {
 func padColor(s string, styles []string) string {
 	buffer := ""
 	for _, style := range styles {
-		buffer += ansi.Color(pad(s+style, 20), s+style)
+		buffer += emerald.Color(pad(s+style, 20), s+style)
 	}
 	return buffer
 }
 
 func printPlain() {
-	ansi.DisableColors(true)
+	emerald.SetColorState(false)
 	bgColors := []string{
 		"",
 		":black",
@@ -43,7 +42,7 @@ func printPlain() {
 		":cyan",
 		":white",
 	}
-	for fg := range ansi.Colors {
+	for fg := range emerald.Colors {
 		for _, bg := range bgColors {
 			println(padColor(fg, []string{"" + bg, "+b" + bg, "+bh" + bg, "+u" + bg}))
 			println(padColor(fg, []string{"+uh" + bg, "+B" + bg, "+Bb" + bg /* backgrounds */, "" + bg + "+h"}))
@@ -53,7 +52,7 @@ func printPlain() {
 }
 
 func printColors() {
-	ansi.DisableColors(false)
+	emerald.SetColorState(true)
 	stdout := colorable.NewColorableStdout()
 
 	bgColors := []string{
@@ -69,7 +68,7 @@ func printColors() {
 	}
 
 	keys := []string{}
-	for fg := range ansi.Colors {
+	for fg := range emerald.Colors {
 		_, err := strconv.Atoi(fg)
 		if err != nil {
 			keys = append(keys, fg)
@@ -87,7 +86,7 @@ func printColors() {
 }
 
 func print256Colors() {
-	ansi.DisableColors(false)
+	emerald.SetColorState(true)
 	stdout := colorable.NewColorableStdout()
 
 	bgColors := []string{""}
@@ -97,7 +96,7 @@ func print256Colors() {
 	}
 
 	keys := []string{}
-	for fg := range ansi.Colors {
+	for fg := range emerald.Colors {
 		n, err := strconv.Atoi(fg)
 		if err == nil {
 			keys = append(keys, fmt.Sprintf("%3d", n))
@@ -115,21 +114,22 @@ func print256Colors() {
 
 func printConstants() {
 	stdout := colorable.NewColorableStdout()
-	fmt.Fprintln(stdout, ansi.DefaultFG, "ansi.DefaultFG", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.Black, "ansi.Black", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.Red, "ansi.Red", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.Green, "ansi.Green", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.Yellow, "ansi.Yellow", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.Blue, "ansi.Blue", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.Magenta, "ansi.Magenta", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.Cyan, "ansi.Cyan", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.White, "ansi.White", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.LightBlack, "ansi.LightBlack", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.LightRed, "ansi.LightRed", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.LightGreen, "ansi.LightGreen", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.LightYellow, "ansi.LightYellow", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.LightBlue, "ansi.LightBlue", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.LightMagenta, "ansi.LightMagenta", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.LightCyan, "ansi.LightCyan", ansi.Reset)
-	fmt.Fprintln(stdout, ansi.LightWhite, "ansi.LightWhite", ansi.Reset)
+	fmt.Fprintln(stdout, emerald.DefaultFG, "emerald.DefaultFG", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.DefaultBG, "emerald.DefaultBG", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.Black, "emerald.Black", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.Red, "emerald.Red", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.Green, "emerald.Green", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.Yellow, "emerald.Yellow", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.Blue, "emerald.Blue", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.Magenta, "emerald.Magenta", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.Cyan, "emerald.Cyan", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.White, "emerald.White", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.LightBlack, "emerald.LightBlack", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.LightRed, "emerald.LightRed", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.LightGreen, "emerald.LightGreen", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.LightYellow, "emerald.LightYellow", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.LightBlue, "emerald.LightBlue", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.LightMagenta, "emerald.LightMagenta", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.LightCyan, "emerald.LightCyan", emerald.Reset)
+	fmt.Fprintln(stdout, emerald.LightWhite, "emerald.LightWhite", emerald.Reset)
 }
