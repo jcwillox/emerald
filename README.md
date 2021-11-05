@@ -70,6 +70,7 @@ Colors
 * cyan
 * white
 * 0...255 (256 colors)
+* \#FFFFFF (hex color codes)
 
 Foreground Attributes
 

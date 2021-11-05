@@ -191,10 +191,21 @@ func colorCode(style string) *bytes.Buffer {
 		}
 	}
 
-	// if 256-color
+	// parse color
 	n, err := strconv.Atoi(fgKey)
 	if err == nil {
-		fmt.Fprintf(buf, "38;5;%d;", n)
+		if n < 8 {
+			fmt.Fprintf(buf, "%d;", n+30)
+		} else if n < 16 {
+			fmt.Fprintf(buf, "%d;", n+82)
+		} else {
+			fmt.Fprintf(buf, "38;5;%d;", n)
+		}
+	} else if strings.HasPrefix(fgKey, "#") && len(fgKey) == 7 {
+		r, _ := strconv.ParseInt(fgKey[1:3], 16, 64)
+		g, _ := strconv.ParseInt(fgKey[3:5], 16, 64)
+		b, _ := strconv.ParseInt(fgKey[5:7], 16, 64)
+		fmt.Fprintf(buf, "38;2;%d;%d;%d;", r, g, b)
 	} else {
 		fmt.Fprintf(buf, "%d;", base+fg)
 	}
@@ -204,10 +215,21 @@ func colorCode(style string) *bytes.Buffer {
 		if strings.Contains(bgStyle, "h") {
 			base = highIntensityBG
 		}
-		// if 256-color
+		// parse color
 		n, err := strconv.Atoi(bg)
 		if err == nil {
-			fmt.Fprintf(buf, "48;5;%d;", n)
+			if n < 8 {
+				fmt.Fprintf(buf, "%d;", n+40)
+			} else if n < 16 {
+				fmt.Fprintf(buf, "%d;", n+92)
+			} else {
+				fmt.Fprintf(buf, "48;5;%d;", n)
+			}
+		} else if strings.HasPrefix(bg, "#") && len(bg) == 7 {
+			r, _ := strconv.ParseInt(bg[1:3], 16, 64)
+			g, _ := strconv.ParseInt(bg[3:5], 16, 64)
+			b, _ := strconv.ParseInt(bg[5:7], 16, 64)
+			fmt.Fprintf(buf, "48;2;%d;%d;%d;", r, g, b)
 		} else {
 			fmt.Fprintf(buf, "%d;", base+Colors[bg])
 		}
