@@ -272,6 +272,26 @@ func ColorFunc(style string) func(string) string {
 	}
 }
 
+// ColorFuncVar creates a closure to avoid computation ANSI color code and returns ANSI sequence.
+func ColorFuncVar(style string) (func(string) string, string) {
+	if style == "" {
+		return func(s string) string {
+			return s
+		}, ""
+	}
+	color := ColorCode(style)
+	return func(s string) string {
+		if plain || s == "" {
+			return s
+		}
+		buf := bytes.NewBufferString(color)
+		buf.WriteString(s)
+		buf.WriteString(Reset)
+		result := buf.String()
+		return result
+	}, color
+}
+
 // DisableColors disables ANSI color codes. The default is false (colors are on).
 func disableAnsiColors(disable bool) {
 	if plain == disable {
