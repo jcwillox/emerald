@@ -2,7 +2,6 @@ package emerald
 
 import (
 	"fmt"
-	"github.com/jcwillox/emerald/emeraldp"
 )
 
 const (
@@ -17,7 +16,7 @@ const (
 )
 
 func CursorUp(lines int) {
-	emeraldp.Printf(CursorUpSeq, lines)
+	Printf(CursorUpSeq, lines)
 }
 
 func CursorUpVar(lines int) string {
@@ -25,7 +24,7 @@ func CursorUpVar(lines int) string {
 }
 
 func CursorDown(lines int) {
-	emeraldp.Printf(CursorDownSeq, lines)
+	Printf(CursorDownSeq, lines)
 }
 
 func CursorDownVar(lines int) string {
@@ -33,7 +32,7 @@ func CursorDownVar(lines int) string {
 }
 
 func CursorRight(columns int) {
-	emeraldp.Printf(CursorRightSeq, columns)
+	Printf(CursorRightSeq, columns)
 }
 
 func CursorRightVar(columns int) string {
@@ -41,17 +40,17 @@ func CursorRightVar(columns int) string {
 }
 
 func ShowCursor() {
-	emeraldp.Print(ShowCursorSeq)
+	Print(ShowCursorSeq)
 }
 
 func HideCursor() {
-	emeraldp.Print(HideCursorSeq)
+	Print(HideCursorSeq)
 }
 
 func EnableLineWrap() {
-	emeraldp.Print(EnableLineWrapSeq)
+	Print(EnableLineWrapSeq)
 }
 
 func DisableLineWrap() {
-	emeraldp.Print(DisableLineWrapSeq)
+	Print(DisableLineWrapSeq)
 }

@@ -110,15 +110,15 @@ Background Attributes
 
 ## Windows Support
 
-Use the subpackage `emeraldp` which has print functions that wrap [mattn/go-colorable](https://github.com/mattn/go-colorable) to handle ANSI support on older windows systems. The library is in a subpackage, so it can be easily dot imported. 
+Emerald has full support for Windows and has print functions that wrap [mattn/go-colorable](https://github.com/mattn/go-colorable) to handle ANSI support on older windows systems.
 ```go
 import (
-    "github.com/jcwillox/emerald/emeraldp"
+    "github.com/jcwillox/emerald"
 )
 
-emeraldp.Print(emerald.Blue)
-emeraldp.Printf("%s%s", emerald.Blue, "Hello World")
-emeraldp.Println(emerald.Blue, "Hello World", Reset)
+emerald.Print(emerald.Blue)
+emerald.Printf("%s%s", emerald.Blue, "Hello World")
+emerald.Println(emerald.Blue, "Hello World", Reset)
 ```
 
 ## References
