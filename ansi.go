@@ -292,6 +292,33 @@ func ColorFuncVar(style string) (func(string) string, string) {
 	}, color
 }
 
+func ColorInterface(style string) ColorPrinter {
+	color := ColorCode(style)
+	return ColorPrinter{ANSI: color}
+}
+
+type ColorPrinter struct {
+	ANSI string
+}
+
+func (c ColorPrinter) Print(a ...interface{}) {
+	Print(c.ANSI)
+	Print(a...)
+	Print(Reset)
+}
+
+func (c ColorPrinter) Printf(format string, a ...interface{}) {
+	Print(c.ANSI)
+	Printf(format, a...)
+	Print(Reset)
+}
+
+func (c ColorPrinter) Println(a ...interface{}) {
+	Print(c.ANSI)
+	Print(a...)
+	Println(Reset)
+}
+
 // DisableColors disables ANSI color codes. The default is false (colors are on).
 func disableAnsiColors(disable bool) {
 	if plain == disable {
