@@ -7,12 +7,12 @@ import (
 )
 
 func TestPlain(t *testing.T) {
-	DisableColors(true)
+	SetColorState(false)
 	PrintStyles()
 }
 
 func TestStyles(t *testing.T) {
-	DisableColors(false)
+	SetColorState(true)
 	PrintStyles()
 }
 
@@ -23,8 +23,7 @@ func TestDisableColors(t *testing.T) {
 	if buf.String() != "" {
 		t.Fail()
 	}
-
-	DisableColors(true)
+	SetColorState(false)
 	if Black != "" {
 		t.Fail()
 	}
@@ -36,8 +35,7 @@ func TestDisableColors(t *testing.T) {
 	if s != "foo" {
 		t.Fail()
 	}
-
-	DisableColors(false)
+	SetColorState(true)
 	if Black == "" {
 		t.Fail()
 	}

@@ -251,7 +251,10 @@ func ColorFunc(style string) func(string) string {
 }
 
 // DisableColors disables ANSI color codes. The default is false (colors are on).
-func DisableColors(disable bool) {
+func disableAnsiColors(disable bool) {
+	if plain == disable {
+		return
+	}
 	plain = disable
 	if plain {
 		Black = ""
