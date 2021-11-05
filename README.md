@@ -107,6 +107,19 @@ Background Attributes
 * emerald.LightCyan
 * emerald.LightWhite
 
+## Windows Support
+
+Use the subpackage `emeraldp` which has print functions that wrap [mattn/go-colorable](https://github.com/mattn/go-colorable) to handle ANSI support on older windows systems. The library is in a subpackage, so it can be easily dot imported. 
+```go
+import (
+    "github.com/jcwillox/emerald/emeraldp"
+)
+
+emeraldp.Print(emerald.Blue)
+emeraldp.Printf("%s%s", emerald.Blue, "Hello World")
+emeraldp.Println(emerald.Blue, "Hello World", Reset)
+```
+
 ## References
 
 Wikipedia ANSI escape codes [Colors](http://en.wikipedia.org/wiki/ANSI_escape_code#Colors)
