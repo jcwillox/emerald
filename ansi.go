@@ -40,53 +40,40 @@ const (
 	DefaultFG = "\033[39m"
 )
 
-// Black FG
-var Black string
-
-// Red FG
-var Red string
-
-// Green FG
-var Green string
-
-// Yellow FG
-var Yellow string
-
-// Blue FG
-var Blue string
-
-// Magenta FG
-var Magenta string
-
-// Cyan FG
-var Cyan string
-
-// White FG
-var White string
-
-// LightBlack FG
-var LightBlack string
-
-// LightRed FG
-var LightRed string
-
-// LightGreen FG
-var LightGreen string
-
-// LightYellow FG
-var LightYellow string
-
-// LightBlue FG
-var LightBlue string
-
-// LightMagenta FG
-var LightMagenta string
-
-// LightCyan FG
-var LightCyan string
-
-// LightWhite FG
-var LightWhite string
+var (
+	// Black FG
+	Black = start + "30m"
+	// Red FG
+	Red = start + "31m"
+	// Green FG
+	Green = start + "32m"
+	// Yellow FG
+	Yellow = start + "33m"
+	// Blue FG
+	Blue = start + "34m"
+	// Magenta FG
+	Magenta = start + "35m"
+	// Cyan FG
+	Cyan = start + "36m"
+	// White FG
+	White = start + "37m"
+	// LightBlack FG
+	LightBlack = start + "90m"
+	// LightRed FG
+	LightRed = start + "91m"
+	// LightGreen FG
+	LightGreen = start + "92m"
+	// LightYellow FG
+	LightYellow = start + "93m"
+	// LightBlue FG
+	LightBlue = start + "94m"
+	// LightMagenta FG
+	LightMagenta = start + "95m"
+	// LightCyan FG
+	LightCyan = start + "96m"
+	// LightWhite FG
+	LightWhite = start + "97m"
+)
 
 var (
 	plain = false
@@ -103,29 +90,6 @@ var (
 		"default": defaultt,
 	}
 )
-
-func init() {
-	for i := 0; i < 256; i++ {
-		Colors[strconv.Itoa(i)] = i
-	}
-
-	Black = ColorCode("black")
-	Red = ColorCode("red")
-	Green = ColorCode("green")
-	Yellow = ColorCode("yellow")
-	Blue = ColorCode("blue")
-	Magenta = ColorCode("magenta")
-	Cyan = ColorCode("cyan")
-	White = ColorCode("white")
-	LightBlack = ColorCode("black+h")
-	LightRed = ColorCode("red+h")
-	LightGreen = ColorCode("green+h")
-	LightYellow = ColorCode("yellow+h")
-	LightBlue = ColorCode("blue+h")
-	LightMagenta = ColorCode("magenta+h")
-	LightCyan = ColorCode("cyan+h")
-	LightWhite = ColorCode("white+h")
-}
 
 // ColorCode returns the ANSI color code for style.
 func ColorCode(style string) string {
@@ -346,21 +310,21 @@ func disableAnsiColors(disable bool) {
 		LightCyan = ""
 		LightWhite = ""
 	} else {
-		Black = ColorCode("black")
-		Red = ColorCode("red")
-		Green = ColorCode("green")
-		Yellow = ColorCode("yellow")
-		Blue = ColorCode("blue")
-		Magenta = ColorCode("magenta")
-		Cyan = ColorCode("cyan")
-		White = ColorCode("white")
-		LightBlack = ColorCode("black+h")
-		LightRed = ColorCode("red+h")
-		LightGreen = ColorCode("green+h")
-		LightYellow = ColorCode("yellow+h")
-		LightBlue = ColorCode("blue+h")
-		LightMagenta = ColorCode("magenta+h")
-		LightCyan = ColorCode("cyan+h")
-		LightWhite = ColorCode("white+h")
+		Black = start + "30m"
+		Red = start + "31m"
+		Green = start + "32m"
+		Yellow = start + "33m"
+		Blue = start + "34m"
+		Magenta = start + "35m"
+		Cyan = start + "36m"
+		White = start + "37m"
+		LightBlack = start + "90m"
+		LightRed = start + "91m"
+		LightGreen = start + "92m"
+		LightYellow = start + "93m"
+		LightBlue = start + "94m"
+		LightMagenta = start + "95m"
+		LightCyan = start + "96m"
+		LightWhite = start + "97m"
 	}
 }

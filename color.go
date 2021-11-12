@@ -1,9 +1,9 @@
 package emerald
 
 import (
-	"fmt"
 	"github.com/mattn/go-isatty"
 	"os"
+	"strconv"
 )
 
 var ColorEnabled bool
@@ -47,23 +47,23 @@ func IsColorTerm() bool {
 // ColorIndexFg convert 256 color code to ANSI foreground color
 func ColorIndexFg(index int) string {
 	if index < 8 {
-		return fmt.Sprintf("\x1b[%dm", index+30)
+		return start + strconv.Itoa(index+30) + "m"
 	}
 	if index < 16 {
-		return fmt.Sprintf("\x1b[%dm", index+82)
+		return start + strconv.Itoa(index+82) + "m"
 	}
-	return fmt.Sprintf("\x1b[38;5;%dm", index)
+	return start + "38;5;" + strconv.Itoa(index) + "m"
 }
 
 // ColorIndexBg convert 256 color code to ANSI background color
 func ColorIndexBg(index int) string {
 	if index < 8 {
-		return fmt.Sprintf("\x1b[%dm", index+40)
+		return start + strconv.Itoa(index+40) + "m"
 	}
 	if index < 16 {
-		return fmt.Sprintf("\x1b[%dm", index+92)
+		return start + strconv.Itoa(index+92) + "m"
 	}
-	return fmt.Sprintf("\x1b[48;5;%dm", index)
+	return start + "48;5;" + strconv.Itoa(index) + "m"
 }
 
 // AutoSetColorState automatically SetColorState based on the whether
