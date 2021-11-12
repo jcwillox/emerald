@@ -31,13 +31,6 @@ const (
 	blink         = "5;"
 	inverse       = "7;"
 	strikethrough = "9;"
-
-	// Reset is the ANSI reset escape sequence
-	Reset = "\033[0m"
-	// DefaultBG is the default background
-	DefaultBG = "\033[49m"
-	// DefaultFG is the default foreground
-	DefaultFG = "\033[39m"
 )
 
 var (
@@ -73,6 +66,12 @@ var (
 	LightCyan = start + "96m"
 	// LightWhite FG
 	LightWhite = start + "97m"
+	// Reset is the ANSI reset escape sequence
+	Reset = "\033[0m"
+	// DefaultBG is the default background
+	DefaultBG = "\033[49m"
+	// DefaultFG is the default foreground
+	DefaultFG = "\033[39m"
 )
 
 var (
@@ -309,6 +308,9 @@ func disableAnsiColors(disable bool) {
 		LightMagenta = ""
 		LightCyan = ""
 		LightWhite = ""
+		Reset = ""
+		DefaultBG = ""
+		DefaultFG = ""
 	} else {
 		Black = start + "30m"
 		Red = start + "31m"
@@ -326,5 +328,8 @@ func disableAnsiColors(disable bool) {
 		LightMagenta = start + "95m"
 		LightCyan = start + "96m"
 		LightWhite = start + "97m"
+		Reset = "\033[0m"
+		DefaultBG = "\033[49m"
+		DefaultFG = "\033[39m"
 	}
 }
