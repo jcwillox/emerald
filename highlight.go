@@ -285,3 +285,54 @@ func GetFileModeColor(mode os.FileMode) string {
 	}
 	return ""
 }
+
+func boldAnsi(ansi string) string {
+	if strings.HasPrefix(ansi, "\x1b[0;") && len(ansi) > 4 && ansi[4] != '1' {
+		return "\x1b[0;1;" + ansi[4:]
+	}
+	return ansi
+}
+
+func HighlightFileMode(mode os.FileMode) string {
+	perms := mode.String()
+	sb := strings.Builder{}
+	sb.Grow(128)
+
+	color := GetFileModeColor(mode)
+	if color == FileColors.Executable {
+		color = ""
+	}
+	sb.WriteString(boldAnsi(color))
+	if perms[0] == '-' {
+		sb.WriteString(".")
+	} else {
+		sb.WriteByte(perms[0])
+	}
+	for i := 1; i < len(perms); i++ {
+		if perms[i] == '-' {
+			if i == 1 || perms[i-1] != '-' {
+				sb.WriteString(LightBlack)
+			}
+			sb.WriteByte(perms[i])
+		} else {
+			if i < 4 {
+				sb.WriteString("\x1b[1m")
+			}
+			switch perms[i] {
+			case 'r':
+				sb.WriteString(Yellow)
+			case 'w':
+				sb.WriteString(Red)
+			case 'x':
+				if i == 3 && mode.IsRegular() {
+					sb.WriteString(start + "4;32m")
+				}
+				sb.WriteString(Green)
+			}
+			sb.WriteByte(perms[i])
+			sb.WriteString(Reset)
+		}
+	}
+	sb.WriteString(Reset)
+	return sb.String()
+}

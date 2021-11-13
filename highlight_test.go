@@ -83,3 +83,13 @@ func BenchmarkHighlightPathNonExistent(b *testing.B) {
 		HighlightPathStat(path, stat)
 	}
 }
+
+func BenchmarkHighlightFileMode(b *testing.B) {
+	b.Log(HighlightFileMode(0775))
+	b.Log(HighlightFileMode(0600))
+	b.Log(HighlightFileMode(2147484141))
+	b.Log(HighlightFileMode(2147483947))
+	for i := 0; i < b.N; i++ {
+		HighlightFileMode(2147484141)
+	}
+}
