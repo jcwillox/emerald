@@ -239,6 +239,9 @@ func GetFileColorStat(stat os.FileInfo) string {
 }
 
 func GetFileTypeColor(filename string) string {
+	if plain {
+		return ""
+	}
 	ext := GetExtOnly(filename)
 	switch {
 	case IsTemp(filename):
@@ -266,6 +269,9 @@ func GetFileTypeColor(filename string) string {
 }
 
 func GetFileModeColor(mode os.FileMode) string {
+	if plain {
+		return ""
+	}
 	if mode&os.ModeDir != 0 {
 		return FileColors.Directory
 	} else if mode&os.ModeSymlink != 0 {
@@ -316,7 +322,7 @@ func HighlightFileMode(mode os.FileMode) string {
 			sb.WriteByte(perms[i])
 		} else {
 			if i < 4 {
-				sb.WriteString("\x1b[1m")
+				sb.WriteString(Bold)
 			}
 			switch perms[i] {
 			case 'r':
@@ -324,7 +330,7 @@ func HighlightFileMode(mode os.FileMode) string {
 			case 'w':
 				sb.WriteString(Red)
 			case 'x':
-				if i == 3 && mode.IsRegular() {
+				if i == 3 && mode.IsRegular() && !plain {
 					sb.WriteString(start + "4;32m")
 				}
 				sb.WriteString(Green)
