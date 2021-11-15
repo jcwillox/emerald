@@ -72,6 +72,8 @@ var (
 	DefaultBG = "\033[49m"
 	// DefaultFG is the default foreground
 	DefaultFG = "\033[39m"
+	// Bold FG
+	Bold = start + "1m"
 )
 
 var (
@@ -311,6 +313,7 @@ func disableAnsiColors(disable bool) {
 		Reset = ""
 		DefaultBG = ""
 		DefaultFG = ""
+		Bold = ""
 	} else {
 		Black = start + "30m"
 		Red = start + "31m"
@@ -331,5 +334,6 @@ func disableAnsiColors(disable bool) {
 		Reset = "\033[0m"
 		DefaultBG = "\033[49m"
 		DefaultFG = "\033[39m"
+		Bold = start + "1m"
 	}
 }
