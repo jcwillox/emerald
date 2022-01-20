@@ -11,10 +11,12 @@ import (
 
 var (
 	Stdout io.Writer
+	Stderr io.Writer
 )
 
 func init() {
 	Stdout = colorable.NewColorableStdout()
+	Stderr = colorable.NewColorableStderr()
 }
 
 func Print(a ...interface{}) (n int) {
