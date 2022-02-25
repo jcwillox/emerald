@@ -77,7 +77,8 @@ var (
 )
 
 var (
-	plain = false
+	plain      = false
+	resetStyle = true
 	// Colors maps common color names to their ANSI color code.
 	Colors = map[string]int{
 		"black":   black,
@@ -131,7 +132,9 @@ func colorCode(style string) *bytes.Buffer {
 
 	buf.WriteString(start)
 	base := normalIntensityFG
-	buf.WriteString(normal) // reset any previous style
+	if resetStyle {
+		buf.WriteString(normal) // reset any previous style
+	}
 	if len(fgStyle) > 0 {
 		if strings.Contains(fgStyle, "b") {
 			buf.WriteString(bold)
@@ -336,4 +339,8 @@ func disableAnsiColors(disable bool) {
 		DefaultFG = "\033[39m"
 		Bold = start + "1m"
 	}
+}
+
+func DisableResetStyle(disabled bool) {
+	resetStyle = !disabled
 }
